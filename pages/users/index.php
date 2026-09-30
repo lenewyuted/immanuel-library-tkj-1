@@ -66,6 +66,11 @@
                   </div>
                 </td>
                 <?php endforeach?>
+                <?php if(count($users) < 1):?>
+                <tr>
+                  <td style="text-align: center;" colspan="5">Tidak ada data user yang ditemukan</td>
+                </tr>
+              <?php endif?>
               </tr>
             </tbody>
           </table>
