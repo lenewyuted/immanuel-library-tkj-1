@@ -65,7 +65,7 @@ $users = getUsers()
                 <td>
                   <div class="cell-actions">
                     <a href="edit.php?id=<?= $user['id'] ?>" class="btn btn-outline btn-sm">Edit</a>
-                    <form method="post" action="../../actions/users/destroy.php" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
+                    <form method="post" action="../../actions/users/destroy.php" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus pengguna ini?')">
                         <input type="hidden" name="id" value="<?= $user['id'] ?>">
                         <button type="submit" name="destroy" class="btn btn-danger btn-sm">Hapus</button>
                       </form>

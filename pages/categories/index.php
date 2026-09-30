@@ -60,7 +60,7 @@ $categories = getCategories();
                 <td>
                   <div class="cell-actions">
                     <a href="edit.php?id=<?= $category['id'] ?>" class="btn btn-outline btn-sm">Edit</a>
-                    <form method="post" action="../../actions/categories/destroy.php" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
+                    <form method="post" action="../../actions/categories/destroy.php" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus kategori ini?')">
                         <input type="hidden" name="id" value="<?= $category['id'] ?>">
                         <button type="submit" name="destroy" class="btn btn-danger btn-sm">Hapus</button>
                       </form>
