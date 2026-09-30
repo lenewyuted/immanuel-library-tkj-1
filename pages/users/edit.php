@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . "/../../repositories/user-repository.php";
+$user = getUser();
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>

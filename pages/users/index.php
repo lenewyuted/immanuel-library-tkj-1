@@ -1,4 +1,7 @@
-<?php require_once __DIR__ . "/../../repositories/user-repository.php"?>
+<?php 
+require_once __DIR__ . "/../../repositories/user-repository.php";
+$users = getUsers();
+?>
 
 <!DOCTYPE html>
 <html lang="id">
