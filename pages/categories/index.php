@@ -1,4 +1,8 @@
-<?php require_once __DIR__ . "/../../repositories/category-repository.php"?>
+<?php 
+require_once __DIR__ . "/../../repositories/category-repository.php";
+
+$categories = getCategories();
+?>
 
 <!DOCTYPE html>
 <html lang="id">
