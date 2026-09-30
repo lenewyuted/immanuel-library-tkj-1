@@ -1,4 +1,7 @@
-<?php require_once __DIR__ . "/../../repositories/author-repository.php"?>
+<?php 
+require_once __DIR__ . "/../../repositories/author-repository.php";
+$authors = getAuthors();
+?>
 
 <!DOCTYPE html>
 <html lang="id">

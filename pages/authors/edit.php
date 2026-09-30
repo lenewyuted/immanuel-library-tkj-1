@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . "/../../repositories/author-repository.php";
+$author = getAuthor();
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
