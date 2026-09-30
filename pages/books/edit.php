@@ -1,7 +1,11 @@
-<?php 
-require_once __DIR__ . "/../../repositories/book-repository.php"; 
+<?php
+require_once __DIR__ . "/../../repositories/book-repository.php";
+require_once __DIR__ . "/../../repositories/category-repository.php";
+require_once __DIR__ . "/../../repositories/author-repository.php";
 
 $book = getBook();
+$categories = getCategories();
+$authors = getAuthors();
 ?>
 
 <!DOCTYPE html>
@@ -13,22 +17,11 @@ $book = getBook();
   <link rel="stylesheet" href="../../styles/books/edit.css">
 </head>
 <body>
-  <?php
-  $categories = ["Fiksi", "Sains", "Sejarah", "Teknologi"];
-  $authors = ["Andrea Hirata", "Tere Liye", "J.K. Rowling", "Pramoedya Ananta Toer", "Sapardi Djoko Damono"];
-
-  $book = [
-      "id" => 5, "title" => "Antologi Rasa Nusantara", "isbn" => "978-602-1234-56-7",
-      "year" => 2021, "stock" => 4, "category_id" => 1,
-      "description" => "Kumpulan puisi dan cerita pendek dari berbagai penulis Nusantara.",
-      "author_ids" => [4, 5],
-  ];
-  ?>
   <div class="app-shell">
-    <?php require_once __DIR__ . "/../../components/admin/sidebar.php"?>
+    <?php require_once __DIR__ . "/../../components/admin/sidebar.php"; ?>
 
     <main class="app-main">
-      <?php 
+      <?php
       $pageTitle = "Edit Buku";
       $pageSubtitle = "Perbarui data buku, kategori, dan penulis";
       require_once __DIR__ . "/../../components/admin/topbar.php";
@@ -61,8 +54,8 @@ $book = getBook();
               <div class="form-group">
                 <label for="category_id">Kategori</label>
                 <select id="category_id" name="category_id">
-                  <?php foreach ($categories as $index => $category): ?>
-                    <option value="<?= $index + 1 ?>" <?= ($index + 1) === $book['category_id'] ? 'selected' : '' ?>><?= $category ?></option>
+                  <?php foreach ($categories as $category): ?>
+                    <option value="<?= $category['id'] ?>" <?= $category['name'] === $book['category'] ? 'selected' : '' ?>><?= $category['name'] ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -78,11 +71,10 @@ $book = getBook();
             <div class="form-group">
               <label>Pilih Penulis (bisa lebih dari satu)</label>
               <div class="checkbox-grid">
-                <?php foreach ($authors as $index => $authorName): ?>
-                  <?php $authorId = $index + 1; ?>
+                <?php foreach ($authors as $author): ?>
                   <label class="checkbox-item">
-                    <input type="checkbox" name="author_ids[]" value="<?= $authorId ?>" <?= in_array($authorId, $book['author_ids']) ? 'checked' : '' ?>>
-                    <?= $authorName ?>
+                    <input type="checkbox" name="author_ids[]" value="<?= $author['id'] ?>" <?= in_array($author['name'], $book['authors']) ? 'checked' : '' ?>>
+                    <?= $author['name'] ?>
                   </label>
                 <?php endforeach; ?>
               </div>
