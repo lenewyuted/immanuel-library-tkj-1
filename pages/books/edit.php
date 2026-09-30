@@ -1,3 +1,8 @@
+<?php 
+require_once __DIR__ . "/../../repositories/book-repository.php"; 
+$book = getBook();
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -29,7 +34,7 @@
       ?>
 
       <div class="app-content">
-        <form method="" action="">
+        <form method="post" action="../../actions/books/update.php">
           <input type="hidden" name="id" value="<?= $book['id'] ?>">
           <div class="form-card" style="margin-bottom:20px;">
             <div class="form-section-title">Data Buku</div>
@@ -84,7 +89,7 @@
 
             <div class="form-actions">
               <a href="index.php" class="btn btn-outline">Batal</a>
-              <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+              <button name="update" type="submit" class="btn btn-primary">Simpan Perubahan</button>
             </div>
           </div>
         </form>
