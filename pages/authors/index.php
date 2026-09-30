@@ -57,7 +57,10 @@ $authors = getAuthors();
                 <td>
                   <div class="cell-actions">
                     <a href="edit.php?id=<?= $author['id'] ?>" class="btn btn-outline btn-sm">Edit</a>
-                    <a href="#" class="btn btn-danger btn-sm">Hapus</a>
+                    <form method="post" action="../../actions/authors/destroy.php" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
+                        <input type="hidden" name="id" value="<?= $author['id'] ?>">
+                        <button type="submit" name="destroy" class="btn btn-danger btn-sm">Hapus</button>
+                      </form>
                   </div>
                 </td>
               </tr>
