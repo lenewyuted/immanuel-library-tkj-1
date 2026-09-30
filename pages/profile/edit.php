@@ -1,3 +1,9 @@
+<?php
+require_once __DIR__ . "/../../repositories/user-repository.php";
+$user = getUser();
+$profile = getProfile();
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -33,7 +39,7 @@
       ?>
 
       <div class="app-content">
-        <form method="" action="">
+        <form method="post" action="../../actions/profile/update.php">
           <div class="form-card" style="margin-bottom:20px;">
             <div class="form-section-title">Data Akun</div>
             <div class="form-row">
@@ -69,7 +75,7 @@
             </div>
             <div class="form-actions">
               <button type="button" class="btn btn-outline">Batal</button>
-              <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+              <button name="update" type="submit" class="btn btn-primary">Simpan Perubahan</button>
             </div>
           </div>
         </form>
