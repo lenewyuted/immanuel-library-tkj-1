@@ -19,7 +19,7 @@
       ?>
 
       <div class="app-content">
-        <form method="" action="">
+        <form method="post" action="../../actions/users/store.php">
           <div class="form-card">
             <div class="form-section-title">Data Pengguna</div>
             <div class="form-row">
@@ -48,7 +48,7 @@
 
             <div class="form-actions">
               <a href="index.php" class="btn btn-outline">Batal</a>
-              <button type="submit" class="btn btn-primary">Simpan Pengguna</button>
+              <button name="store" type="submit" class="btn btn-primary">Simpan Pengguna</button>
             </div>
           </div>
         </form>
