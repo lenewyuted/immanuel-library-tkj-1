@@ -1,4 +1,8 @@
-<?php require_once __DIR__ . "/../../repositories/book-repository.php"; ?>
+<?php 
+require_once __DIR__ . "/../../repositories/book-repository.php"; 
+
+$books = getBooks();
+?>
 
 <!DOCTYPE html>
 <html lang="id">
@@ -88,7 +92,7 @@
                   </td>
                 </tr>
               <?php endforeach ?>
-              <?php if(count($books) < 1):?>
+              <?php if(empty($books)):?>
                 <tr>
                   <td style="text-align: center;" colspan="5">Tidak ada data buku yang ditemukan</td>
                 </tr>

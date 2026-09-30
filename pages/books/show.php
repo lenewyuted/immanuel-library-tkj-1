@@ -1,4 +1,8 @@
-<?php require_once __DIR__ . "/../../repositories/book-repository.php"; ?>
+<?php 
+require_once __DIR__ . "/../../repositories/book-repository.php"; 
+$book = getBook();
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
