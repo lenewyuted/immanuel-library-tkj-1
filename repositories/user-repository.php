@@ -22,6 +22,7 @@ function getUser() {
 
 function getProfile () {
   $profile = [
+    "user_id" => 1,
     "phone" => "0812-3456-7890",
     "address" => "Jl. Merdeka No. 21, Pontianak, Kalimantan Barat",
     "bio" => "Murid kelas XI TKJ yang gemar membaca novel fiksi dan buku pengembangan diri.",
