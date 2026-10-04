@@ -14,7 +14,10 @@ $profile = getProfile();
 </head>
 <body>
   <div class="app-shell">
-    <?php require_once __DIR__ . "/../../components/admin/sidebar.php"?>
+    <?php 
+    $activeMenu = "profile";
+    require_once __DIR__ . "/../../components/admin/sidebar.php"
+    ?>
 
     <main class="app-main">
       <?php

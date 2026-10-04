@@ -8,7 +8,10 @@
 </head>
 <body>
   <div class="app-shell">
-    <?php require_once __DIR__ . "/../../components/admin/sidebar.php"?>
+    <?php 
+    $activeMenu = "users";
+    require_once __DIR__ . "/../../components/admin/sidebar.php"
+    ?>
 
 
     <main class="app-main">
