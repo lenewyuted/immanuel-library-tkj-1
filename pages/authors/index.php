@@ -25,7 +25,7 @@ $authors = getAuthors();
 
       <div class="app-content">
         <div class="toolbar">
-          <form method="" action="" class="toolbar-filters">
+          <form method="get" action="index.php" class="toolbar-filters">
             <div class="search-box">
               <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
               <input type="text" name="search" class="search-input" placeholder="Cari nama penulis...">
