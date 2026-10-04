@@ -14,13 +14,6 @@ $author = getAuthor();
 </head>
 
 <body>
-  <?php
-  $author = [
-    "id" => 1,
-    "name" => "Andrea Hirata",
-    "bio" => "Penulis asal Belitung, dikenal lewat novel Laskar Pelangi.",
-  ];
-  ?>
   <div class="app-shell">
     <?php require_once __DIR__ . "/../../components/admin/sidebar.php"?>
 
