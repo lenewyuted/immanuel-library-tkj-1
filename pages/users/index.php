@@ -1,6 +1,6 @@
 <?php 
 require_once __DIR__ . "/../../repositories/user-repository.php";
-$users = getUsers()
+$users = getUsers();
 ?>
 
 <!DOCTYPE html>
