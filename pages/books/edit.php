@@ -73,7 +73,7 @@ $authors = getAuthors();
               <div class="checkbox-grid">
                 <?php foreach ($authors as $author): ?>
                   <label class="checkbox-item">
-                    <input type="checkbox" name="author_ids[]" value="<?= $author['id'] ?>" <?= in_array($author['name'], $book['authors']) ? 'checked' : '' ?>>
+                    <input type="checkbox" name="author_ids[]" value="<?= $author['id'] ?>" <?= in_array($author['id'], $book['author_ids']) ? 'checked' : '' ?>>
                     <?= $author['name'] ?>
                   </label>
                 <?php endforeach; ?>
