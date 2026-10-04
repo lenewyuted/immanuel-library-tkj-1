@@ -61,7 +61,7 @@ $profile = getProfile();
               <textarea id="bio" name="bio" rows="3"><?= $profile['bio'] ?></textarea>
             </div>
             <div class="form-actions">
-              <button type="button" class="btn btn-outline">Batal</button>
+              <button type="button" class="btn btn-outline" onclick="history.back()">Batal</button>
               <button name="update" type="submit" class="btn btn-primary">Simpan Perubahan</button>
             </div>
           </div>
