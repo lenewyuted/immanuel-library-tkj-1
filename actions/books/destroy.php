@@ -1,8 +1,8 @@
 <?php
-if (isset($_POST['destroy']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-    echo "ID buku: " . $_POST['id'];
-    echo "<br>";
-    echo "Data berhasil dihapus";
+if (isset($_GET['id']) && $_SERVER['REQUEST_METHOD'] === "GET") {
+    $id = $_GET['id'];
+
+    echo "Buku dengan id " . htmlspecialchars($id) . " berhasil dihapus.";
 }
 
 ?>

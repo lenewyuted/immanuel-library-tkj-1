@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . "/../../repositories/author-repository.php";
+
 $author = getAuthor();
+
+$pageTitle = "Edit Penulis";
+$pageSubtitle = "Perbarui data penulis";
 ?>
 
 <!DOCTYPE html>
@@ -15,20 +19,13 @@ $author = getAuthor();
 
 <body>
   <div class="app-shell">
-    <?php 
-    $activeMenu = "authors";
-    require_once __DIR__ . "/../../components/admin/sidebar.php"
-    ?>
+    <?php require_once __DIR__ . "/../../components/admin/sidebar.php" ?>
 
     <main class="app-main">
-      <?php
-      $pageTitle = "Edit Penulis";
-      $pageSubtitle = "Perbarui data penulis";
-      require_once __DIR__ . "/../../components/admin/topbar.php"
-      ?>
+      <?php require_once __DIR__ . "/../../components/admin/topbar.php" ?>
 
       <div class="app-content">
-        <form method="post" action="../../actions/authors/update.php">
+        <form method="POST" action="../../actions/authors/update.php">
           <input type="hidden" name="id" value="<?= $author['id'] ?>">
           <div class="form-card">
             <div class="form-section-title">Data Penulis</div>
@@ -42,7 +39,7 @@ $author = getAuthor();
             </div>
             <div class="form-actions">
               <a href="index.php" class="btn btn-outline">Batal</a>
-              <button name="update" type="submit" class="btn btn-primary">Simpan Perubahan</button>
+              <button type="submit" name="update" class="btn btn-primary">Simpan Perubahan</button>
             </div>
           </div>
         </form>

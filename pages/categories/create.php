@@ -1,3 +1,8 @@
+<?php
+$pageTitle = "Tambah Kategori";
+$pageSubtitle = "Buat kategori baru untuk mengelompokkan buku";
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -8,20 +13,13 @@
 </head>
 <body>
   <div class="app-shell">
-    <?php 
-    $activeMenu = "categories";
-    require_once __DIR__ . "/../../components/admin/sidebar.php"
-    ?>
+  <?php require_once __DIR__ . "/../../components/admin/sidebar.php" ?>
 
     <main class="app-main">
-      <?php 
-      $pageTitle = "Tambah Kategori";
-      $pageSubtitle = "Buat kategori baru untuk mengelompokkan buku";
-      require_once __DIR__ . "/../../components/admin/topbar.php"
-      ?>
+    <?php require_once __DIR__ . "/../../components/admin/topbar.php" ?>
 
       <div class="app-content">
-        <form method="post" action="../../actions/categories/store.php">
+        <form method="POST" action="../../actions/categories/store.php">
           <div class="form-card">
             <div class="form-section-title">Data Kategori</div>
             <div class="form-group">
@@ -35,7 +33,7 @@
 
             <div class="form-actions">
               <a href="index.php" class="btn btn-outline">Batal</a>
-              <button name="store" type="submit" class="btn btn-primary">Simpan Kategori</button>
+              <button type="submit" name="store" class="btn btn-primary">Simpan Kategori</button>
             </div>
           </div>
         </form>

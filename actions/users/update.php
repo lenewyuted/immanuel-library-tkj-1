@@ -1,8 +1,11 @@
 <?php
-if (isset($_POST['update']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-    echo "Data yang diterima:";
+if (isset($_POST['update']) && $_SERVER['REQUEST_METHOD'] === "POST") {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $role = $_POST['role'];
+
     print_r($_POST);
-} else {
-    echo "Akses tidak valid. Halaman ini hanya dapat diakses lewat pengiriman form (POST).";
 }
+
 ?>

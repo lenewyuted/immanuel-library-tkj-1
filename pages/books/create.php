@@ -4,32 +4,30 @@ require_once __DIR__ . "/../../repositories/author-repository.php";
 
 $categories = getCategories();
 $authors = getAuthors();
+
+$pageTitle = "Tambah Buku";
+$pageSubtitle = "Lengkapi data buku, kategori, dan penulis";
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tambah Buku - Perpustakaan Digital</title>
   <link rel="stylesheet" href="../../styles/books/create.css">
 </head>
+
 <body>
   <div class="app-shell">
-    <?php 
-    $activeMenu = "books";
-    require_once __DIR__ . "/../../components/admin/sidebar.php"; 
-    ?>
+    <?php require_once __DIR__ . "/../../components/admin/sidebar.php" ?>
 
     <main class="app-main">
-      <?php
-      $pageTitle = "Tambah Buku";
-      $pageSubtitle = "Lengkapi data buku, kategori, dan penulis";
-      require_once __DIR__ . "/../../components/admin/topbar.php";
-      ?>
+      <?php require_once __DIR__ . "/../../components/admin/topbar.php" ?>
 
       <div class="app-content">
-        <form method="post" action="../../actions/books/store.php">
+        <form method="POST" action="../../actions/books/store.php">
           <div class="form-card" style="margin-bottom:20px;">
             <div class="form-section-title">Data Buku</div>
             <div class="form-group">
@@ -82,7 +80,7 @@ $authors = getAuthors();
 
             <div class="form-actions">
               <a href="index.php" class="btn btn-outline">Batal</a>
-              <button name="store" type="submit" class="btn btn-primary">Simpan Buku</button>
+              <button type="submit" name="store" class="btn btn-primary">Simpan Buku</button>
             </div>
           </div>
         </form>
@@ -90,4 +88,5 @@ $authors = getAuthors();
     </main>
   </div>
 </body>
+
 </html>

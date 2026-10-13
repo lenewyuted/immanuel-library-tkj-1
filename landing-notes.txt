@@ -1,3 +1,25 @@
-1. Kodenya cukup ditulis sekali, jadi kalau mau ganti logo, menu, atau tambah link CSS/JS, tinggal edit satu file dan semua halaman otomatis ikut berubah. Jadi tidak perlu lagi buka file nya satu satu dan risiko ada halaman yang ketinggalan(lupa ganti)jadi lebih kecil. Isi file index.php juga jadi lebih pendek dan enak dibaca, karena header dan footer tinggal dipanggil pakai require_once. Selain itu setiap file punya tugas yang jelas, jadi lebih gampang diatur.
+CATATAN REFLEKSI - LANDING PAGE IMMANUEL LIBRARY
 
-2. Yang bermasalah itu markup sidebar dan topbar, karena ditulis ulang persis sama di setiap halaman buku, kategori, penulis, pengguna, dan profil. Jadi kalau mau nambah menu di sidebar atau ubah tampilan topbar, harus edit semua file nya satu satu, dan bisa jadi ada yang beda atau ke lewat. Padahal yang beneran beda antar halaman cuma judul, subjudul, dan isi kontennya. Solusinya, sidebar dan topbar dipindah ke components/admin/sidebar.php dan components/admin/topbar.php, lalu dipanggil pakai require_once di setiap halaman, dengan $pageTitle dan $pageSubtitle diisi dari masing-masing halaman.
+1. Apa keuntungan memisahkan header dan footer menjadi file component tersendiri,
+   dibandingkan menuliskannya langsung berulang-ulang di index.php?
+
+   Dengan memisahkan header dan footer ke components/landing/header.php dan
+   components/landing/footer.php, markup yang sama cukup ditulis satu kali lalu
+   disertakan ke halaman mana pun dengan require_once. Jika ada perubahan, misalnya
+   menambah menu navigasi atau mengganti teks hak cipta, cukup mengubah satu file dan
+   seluruh halaman yang memakainya ikut berubah. Hal ini mengurangi risiko tampilan
+   tidak konsisten karena lupa mengubah salah satu salinan. File index.php juga menjadi
+   lebih pendek dan fokus pada isi halaman (hero, statistik, fitur), sehingga lebih mudah
+   dibaca dan dirawat.
+
+2. Bagian mana pada halaman-halaman admin (Buku, Kategori, Penulis, Pengguna, Profil)
+   yang mengalami masalah yang sama seperti header/footer sebelum dipisah?
+
+   Bagian sidebar (elemen <aside> berisi menu Beranda, Buku, Kategori, Penulis, Pengguna,
+   dan Profil Saya) dan topbar (elemen <header> berisi judul halaman serta info pengguna)
+   ditulis ulang secara identik di 14 file halaman admin. Akibatnya, jika satu menu
+   sidebar diubah atau ditambah, kita harus mengedit 14 file satu per satu dan mudah ada
+   yang terlewat. Topbar juga hanya berbeda pada judul dan subjudulnya, sehingga lebih
+   tepat dijadikan satu component yang menerima variabel $pageTitle dan $pageSubtitle.
+   Selain itu, data pada halaman admin masih ditulis sebagai array mentah di tiap file,
+   bukan diambil dari satu sumber (repository function).
