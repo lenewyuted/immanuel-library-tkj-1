@@ -40,19 +40,44 @@ function getBooks()
   return $books;
 }
 
-function getBook()
+function getBook($id)
 {
-  $book = [
-    "id" => 5,
-    "title" => "Antologi Rasa Nusantara",
-    "isbn" => "978-602-1234-56-7",
-    "year" => 2021,
-    "stock" => 4,
-    "category_id" => 1,
-    "category" => "Fiksi",
-    "description" => "Kumpulan puisi dan cerita pendek dari berbagai penulis Nusantara.",
-    "author_ids" => [4, 5],
-    "authors" => ["Pramoedya Ananta Toer", "Sapardi Djoko Damono"],
-  ];
+  global $pdo;
+
+  $query = "select id, title, isbn, year, stock, category_id, description from books where id = :id";
+  //Ga pakai join seperti video read karena kt butuh category_id, itu sebenarnya kt udh ambil dari getCategories yg ada di edit.php. Jdi tinggal cocokin aja apakah id nya sama dgn yg diambil di database dgn yg kt ambil dari table buku. Kalau sama baru dia akan terselect
+
+  $stmt = $pdo -> prepare($query);
+  $stmt -> execute([
+    'id' => $id,
+  ]);
+
+  $book = $stmt -> fetch();
+  //fetch untuk menampilkan 1 data aja
+  
+
+  if(!$book) {
+    header('location: ../books/index.php');
+    exit;
+  }
+
+  $query = "select a.id from book_author ba
+            left join authors a on ba.author_id = a.id
+            where ba.book_id = :book_id"; 
+  //tambahkan key ke dlm book, yg akan mengembalikan id dan juga name dari author"nya
+  //ambilkan saya id dan nama dari author dari book_author kemudian joinkan dengan table authors dan direferensikan, dia cuman akan ambil berdasarkan book_id yaitu berdasarkan inputan kita 
+
+  $stmt = $pdo -> prepare($query);
+  $stmt -> execute([
+    'book_id' => $book['id'],
+  ]); //karena ada inputan jadi kt buka kurung siku
+
+  $authorIds = $stmt->fetchAll();
+
+  $book['author_ids'] = array_column($authorIds, 'id');
+  
+  
+  
+
   return $book;
 }
