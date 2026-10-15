@@ -5,6 +5,7 @@ require_once __DIR__ . "/../../repositories/author-repository.php";
 $categories = getCategories();
 $authors = getAuthors();
 
+
 $pageTitle = "Tambah Buku";
 $pageSubtitle = "Lengkapi data buku, kategori, dan penulis";
 ?>
