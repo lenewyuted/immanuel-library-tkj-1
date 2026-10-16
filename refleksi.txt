@@ -1,0 +1,4 @@
+Hal yang saya masih bingung :
+- Pada pembuatan database.php di folder config. Saya bingung di bagian $options dan try and catch(try and catch bingungnya di database.php aja)
+- Saya bingung kenapa di file lain tinggal pakai require_once __DIR__ . "/../config/database.php"; dan varibael $pdo bisa langsung nyambung dengan databasenya
+- Saya juga bingung di bagian $book['author_ids'] = array_column($authorIds, 'id');
