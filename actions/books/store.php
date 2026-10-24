@@ -1,20 +1,23 @@
 <?php
+session_start(); //wajib kalau kt pakai session
 require_once __DIR__ . "/../../config/database.php";
+require_once __DIR__ . "/../../validations/book-validation.php";
 if (isset($_POST['store']) && $_SERVER['REQUEST_METHOD'] === "POST") {
     try {
         $pdo -> beginTransaction();
         //database transaction : suatu mekanisme yg membantu kita untuk memproses, mengirim, menghapus, mengubah data , dll yg menipulasi data dari database
         //jika terjadi 1 error pada rangkaian prosesnya, maka dia akan mengembalikan prosesnya itu kembali ke semula sebelum data itu diubah , jadi bs membuat data tetap konsisten agar tidak ada data yang nyangkut ketika terjadi error  
 
+        //ketika panggil function ini, function ini akan menerima inputan dari pengguna
+        $request = getBookRequest($_POST);//berisi inputan dari pengguna
+        $errors = validateBook($request);//untuk menampung pesan terakit dgn inputan yg mau kt validasi
+        if(count($errors) > 0) {
+            $_SESSION['errors'] = $errors; //simpan pesan error ke session (tempat penyimpanan sementara yg berada di server)
+            $_SESSION['old'] = $request; //biasa ketika ada validasi error, kebiasaan form akan mereset semua inputannya. Jdi dgn ini bs mempertahankan semua inputannya
 
-        $title = htmlspecialchars($_POST['title']); // membuat inputan pengguna diubah menjadi spesial character dari html 
-        $isbn = htmlspecialchars($_POST['isbn']);
-        $year = htmlspecialchars($_POST['year']);
-        $stock = htmlspecialchars($_POST['stock']);
-        $description = htmlspecialchars($_POST['description']);
-        $categoryId = htmlspecialchars($_POST['category_id']);
-
-
+            header('location: ../../pages/books/create.php');
+            exit;
+        }
 
         $query = "insert into books (title, isbn, year, stock, description, category_id) 
                  values (:title, :isbn, :year, :stock, :description, :category_id)"; 
@@ -22,12 +25,12 @@ if (isset($_POST['store']) && $_SERVER['REQUEST_METHOD'] === "POST") {
         $stmt = $pdo->prepare($query);
         $stmt -> execute([
             //menambah array lalu kt lanjutkan dgn eksekusi nilai nilainya, lalu kt akan ganti placeholder nya dgn nilai aslinya (inputan yg berasal dari form pengguna(dari $POST))
-            'title' => $title,
-            'isbn' => $isbn,
-            'year' => $year,
-            'stock' => $stock,
-            'description' => $description,
-            'category_id' => $categoryId,
+            'title' => $request['title'],
+            'isbn' => $request['isbn'],
+            'year' => $request['year'],
+            'stock' => $request['stock'],
+            'description' => $request['description'],
+            'category_id' => $request['category_id'],
         ]);
         //kt pakai prepare statement yg dmn query itu disusun terlebih dahulu tanpa ada nilainya, yg dmn nilainya akan kt ganti dgn placeholder(mencegah sql injection, agar pengguna ga bs langsung masukin perintah mysql yg berasal form)
         //perintah sql tidak akan dieksekusi, tapi disusun dulu, sehingga nanti baru akan dieksekusi dgn perintah execute
@@ -39,8 +42,7 @@ if (isset($_POST['store']) && $_SERVER['REQUEST_METHOD'] === "POST") {
         //perintah untuk masukin data ke dalam tabel book_author
         $stmt = $pdo->prepare($query);
 
-
-        $authorIds = $_POST['author_ids'];
+        $authorIds = $request['author_ids'];
         foreach($authorIds as $authorId) {
             $stmt -> execute([
                 'book_id' => $bookId,

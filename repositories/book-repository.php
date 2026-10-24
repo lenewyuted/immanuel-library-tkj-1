@@ -81,3 +81,24 @@ function getBook($id)
 
   return $book;
 }
+
+
+function isIsbnTaken($isbn, $ignoreBookId) 
+{
+  global $pdo;
+
+  $bookId = intval($ignoreBookId);
+
+  $query = "select count(id) from books where isbn = :isbn && id != :book_id"; //count(id) menghitung jumlah data yg ada di tabel book
+
+  $stmt = $pdo -> prepare($query);
+  $stmt -> execute([
+    'isbn' => $isbn,
+    'book_id' => $bookId,
+  ]);
+
+  $isIsbnTaken = $stmt -> fetchColumn() > 0;
+
+  return $isIsbnTaken;
+}
+
