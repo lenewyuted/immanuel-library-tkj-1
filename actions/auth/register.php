@@ -1,7 +1,9 @@
 <?php
-session_start();
+require_once __DIR__ . "/../../middleware/auth.php";
 require_once __DIR__ . "/../../config/database.php";
 require_once __DIR__ . "/../../validations/auth-validation.php";
+sessionStart();
+requireGuest();
 
 if(isset($_POST['register']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     try {

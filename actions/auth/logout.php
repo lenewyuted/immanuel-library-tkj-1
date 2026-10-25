@@ -1,9 +1,10 @@
 <?php
-session_start();
+require_once __DIR__ . "/../../middleware/auth.php";
+requireAuth();
 
 $_SESSION = [];
 session_destroy();
 
-header('location: ../../pages/auth/login.php');
+header('location: ' . LOGIN_URL);
 exit;
 ?>

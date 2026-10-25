@@ -1,6 +1,8 @@
 <?php
-session_start();
-$user = $_SESSION['user'];
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$user = $_SESSION['user'] ?? null;
 ?>
 
 <header class="app-topbar">
@@ -19,3 +21,4 @@ $user = $_SESSION['user'];
     </div>
   </div>
 </header>
+

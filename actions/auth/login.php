@@ -1,8 +1,10 @@
 <?php
-session_start();
+require_once __DIR__ . "/../../middleware/auth.php";
 require_once __DIR__ . "/../../config/database.php";
 require_once __DIR__ . "/../../validations/auth-validation.php";
 require_once __DIR__ . "/../../repositories/user-repository.php";
+sessionStart();
+requireGuest();
 
 if(isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
@@ -21,7 +23,7 @@ if(isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             unset($request['password']);
             $_SESSION['old'] = $request;
 
-            header('location: ../../pages/auth/login.php');
+            header('location: ' . LOGIN_URL);
             exit;
         }
 
@@ -33,7 +35,7 @@ if(isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             'role' => $user['role'],
         ];
 
-        header('location: ../../pages/books/index.php');
+        header('location: ' . BOOK_INDEX_URL);
         exit;
         
     } catch (PDOException $e) {

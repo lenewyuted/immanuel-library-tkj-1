@@ -1,5 +1,6 @@
 <?php
-session_start(); //wajib kalau kt pakai session
+require_once __DIR__ . "/../../middleware/auth.php";
+requireRole(['admin']);
 require_once __DIR__ . "/../../config/database.php";
 require_once __DIR__ . "/../../validations/book-validation.php";
 

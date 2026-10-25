@@ -1,7 +1,42 @@
 <?php
+require_once __DIR__ . "/../../middleware/auth.php";
+requireRole(['admin', 'member']);
 require_once __DIR__ . "/../../repositories/book-repository.php";
 
-$book = getBook();
+
+
+require_once __DIR__ . "/../../repositories/category-repository.php";
+require_once __DIR__ . "/../../repositories/author-repository.php";
+
+
+$id = $_GET['id'] ?? '';
+if (!ctype_digit($id)) {
+  header('location: ' . BOOK_INDEX_URL);
+  exit;
+}
+
+$book = getBook($id);
+
+// cari nama kategori dari category_id
+$categoryName = '';
+foreach (getCategories() as $category) {
+  if ($category['id'] == $book['category_id']) {
+    $categoryName = $category['name'];
+    break;
+  }
+}
+
+// cari nama penulis dari author_ids
+$authorNames = [];
+foreach (getAuthors() as $author) {
+  if (in_array($author['id'], $book['author_ids'])) {
+    $authorNames[] = $author['name'];
+  }
+}
+
+
+
+
 
 $pageTitle = "Detail Buku";
 $pageSubtitle = "Informasi lengkap buku beserta kategori dan penulis";
@@ -31,15 +66,25 @@ $pageSubtitle = "Informasi lengkap buku beserta kategori dan penulis";
 
             <div class="detail-row">
               <div class="detail-label">Kategori</div>
-              <div class="detail-value"><span class="badge badge-muted"><?= $book['category'] ?></span></div>
+              <div class="detail-value">
+                
+              
+              <span class="badge badge-muted"><?= htmlspecialchars($categoryName) ?>
+            
+            
+            </span></div>
             </div>
             <div class="detail-row">
               <div class="detail-label">Penulis</div>
               <div class="detail-value">
                 <div class="chip-list">
-                  <?php foreach ($book['authors'] as $authorName): ?>
-                    <span class="chip"><?= $authorName ?></span>
+
+
+                  <?php foreach ($authorNames as $authorName): ?>
+                    <span class="chip"><?= htmlspecialchars($authorName) ?></span>
                   <?php endforeach; ?>
+
+                  
                 </div>
               </div>
             </div>

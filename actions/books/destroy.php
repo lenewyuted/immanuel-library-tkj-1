@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../../middleware/auth.php";
+requireRole(['admin']);
 require_once __DIR__ . "/../../config/database.php";
 
 if (isset($_GET['id']) && $_SERVER['REQUEST_METHOD'] === "GET") {
