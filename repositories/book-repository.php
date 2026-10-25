@@ -1,16 +1,25 @@
 <?php
 require_once __DIR__ . "/../config/database.php";
 
-function getBooks()
+function getBooks($search, $categoryId, $currentPage, $perPage)
 {
   global $pdo;
 
   $query ="select b.id, b.title, b.stock, c.name as category from books b
-           left join categories c on b.category_id = c.id"; //isi perintah mysql untuk ambil data
+           left join categories c on b.category_id = c.id
+           where b.title like :search
+           and(:category_filter = '' or b.category_id = :category_id)
+           limit :limit offset :offset"; //isi perintah mysql untuk ambil data
   //nama table yg mau kt join on foreign key yg kt simpan di tabel books = primary key dari table categories
   //prepare statement : fungsi/cara agar kita untuk menghindari yang namanya sql injection (user yg pakai aplikasi kita bisa menginputkan perintah mysql dari form yg kt buat) 
   $stmt = $pdo -> prepare($query); //siapkan perintah mysql
-  $stmt -> execute(); //eksekusi perintahnya
+  $stmt -> execute([
+    'search' => "%$search%",
+    'category_filter' => $categoryId,
+    'category_id' => $categoryId,
+    'limit' => $perPage,
+    'offset' => ($currentPage - 1) * $perPage,
+  ]); //eksekusi perintahnya
   
   $books = $stmt -> fetchAll(); //$books akan berisi data data buku yang berasal dari database 
   //print_r($books); //akan mengembalikan array asosiatif yang isinya dari database
@@ -100,5 +109,26 @@ function isIsbnTaken($isbn, $ignoreBookId)
   $isIsbnTaken = $stmt -> fetchColumn() > 0;
 
   return $isIsbnTaken;
+}
+
+
+function countOfBooks($search, $categoryId)
+{
+  global $pdo;
+
+  $query = "select count(id) from books 
+            where title like :title and
+            (:category_filter = '' or category_id = :category_id)";
+
+  $stmt = $pdo -> prepare($query);
+  $stmt->execute([
+    'title' => "%$search%",
+    'category_filter' => $categoryId,
+    'category_id' => $categoryId,
+  ]);
+
+  $totalBooks = $stmt -> fetchColumn();
+
+  return $totalBooks;
 }
 
